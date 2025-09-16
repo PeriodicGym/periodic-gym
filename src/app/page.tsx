@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
   BarChart3,
@@ -14,6 +13,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import Spline from "@splinetool/react-spline";
 import {
   Card,
@@ -23,6 +23,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
 const features = [
@@ -76,6 +77,21 @@ const plans = [
 
 export default function PeriodicGymLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -127,72 +143,107 @@ export default function PeriodicGymLanding() {
               size="icon"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              <AnimatePresence initial={false} mode="wait">
+                <motion.div
+                  key={isMenuOpen ? "x" : "menu"}
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isMenuOpen ? (
+                    <X className="h-6 w-6" />
+                  ) : (
+                    <Menu className="h-6 w-6" />
+                  )}
+                </motion.div>
+              </AnimatePresence>
             </Button>
           </div>
         </div>
 
-        {isMenuOpen && (
-          <div className="md:hidden bg-background/95 backdrop-blur border-t">
-            <nav className="flex flex-col bg-background/95 backdrop-blur items-center gap-4 py-4">
-              <a
-                href="#features"
-                className="text-sm"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Funcionalidades
-              </a>
-              <a
-                href="#pricing"
-                className="text-sm"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Preços
-              </a>
-            </nav>
-            <div className="flex flex-col gap-3 px-4 pb-4">
-              <Button
-                className="bg-brand-dark border-2 border-primary text-primary w-full"
-                variant="outline"
-                asChild
-              >
-                <Link href="/">Entrar</Link>
-              </Button>
-              <Button asChild className="w-full">
-                <Link href="/">Começar Grátis</Link>
-              </Button>
-            </div>
-          </div>
-        )}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+            >
+              <nav className="flex flex-col items-center gap-4 py-4">
+                <a
+                  href="#features"
+                  className="text-sm"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Funcionalidades
+                </a>
+                <a
+                  href="#pricing"
+                  className="text-sm"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Preços
+                </a>
+              </nav>
+              <div className="flex flex-col gap-3 px-4 pb-4">
+                <Button
+                  className="bg-brand-dark border-2 border-primary text-primary w-full"
+                  variant="outline"
+                  asChild
+                >
+                  <Link href="/">Entrar</Link>
+                </Button>
+                <Button asChild className="w-full">
+                  <Link href="/">Começar Grátis</Link>
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       <section className="flex flex-col sm:flex-row items-center justify-between p-10 lg:p-20">
-        <div className="w-full lg:w-1/2 text-center lg:text-left">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+        <motion.div
+          className="w-full lg:w-1/2 text-center lg:text-left"
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+        >
+          <motion.h1
+            variants={fadeInUp}
+            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
+          >
             Transforme seus
             <span className="text-primary"> treinos</span> em
             <span className="text-primary"> resultados</span>
-          </h1>
+          </motion.h1>
 
-          <p className="mt-6 text-base md:text-lg leading-8 text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+          <motion.p
+            variants={fadeInUp}
+            className="mt-6 text-base md:text-lg leading-8 text-muted-foreground max-w-2xl mx-auto lg:mx-0"
+          >
             A plataforma mais completa para acompanhar sua evolução na academia.
             Com IA integrada, análises detalhadas e interface intuitiva.
-          </p>
+          </motion.p>
 
-          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+          <motion.div
+            variants={fadeInUp}
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
+          >
             <Button size="lg" asChild className="w-full sm:w-auto">
               <Link href="/login">
                 Começar Gratuitamente
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-          </div>
+          </motion.div>
 
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-x-8 gap-y-4 text-sm text-muted-foreground">
+          <motion.div
+            variants={fadeInUp}
+            className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-x-8 gap-y-4 text-sm text-muted-foreground"
+          >
             <div className="flex items-center gap-2">
               <Check className="h-4 w-4 text-green-500" />
               Grátis para começar
@@ -205,8 +256,8 @@ export default function PeriodicGymLanding() {
               <Check className="h-4 w-4 text-green-500" />
               Cancele quando quiser
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         <div className="w-full lg:w-1/2 h-80 sm:h-96 lg:h-[500px]">
           <Spline scene="https://prod.spline.design/Ulr8wOnMHuMpsefP/scene.splinecode" />
@@ -215,36 +266,55 @@ export default function PeriodicGymLanding() {
 
       <section id="features" className="py-20 bg-muted/30">
         <div className="container px-4">
-          <div className="mx-auto max-w-2xl text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+          <motion.div
+            className="mx-auto max-w-2xl text-center mb-16"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+            variants={staggerContainer}
+          >
+            <motion.h2
+              variants={fadeInUp}
+              className="text-3xl font-bold tracking-tight sm:text-4xl"
+            >
               Tudo que você precisa para evoluir
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
+            </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              className="mt-4 text-lg text-muted-foreground"
+            >
               Funcionalidades pensadas para maximizar seus resultados na
               academia
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <motion.div
+            className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
+          >
             {features.map((feature, index) => (
-              <Card
-                key={index}
-                className="border-0 shadow-[0px_6px_12px_2px_rgba(0,_0,_0,_0.1)]"
-              >
-                <CardHeader>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-200 text-primary">
-                    <feature.icon className="h-6 w-6" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="border-0 shadow-[0px_6px_12px_2px_rgba(0,_0,_0,_0.1)] h-full">
+                  <CardHeader>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-200 text-primary">
+                      <feature.icon className="h-6 w-6" />
+                    </div>
+                    <CardTitle className="pt-2 text-xl">
+                      {feature.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-base">
+                      {feature.description}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
