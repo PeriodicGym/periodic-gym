@@ -111,16 +111,16 @@ export default function PeriodicGymLanding() {
               Funcionalidades
             </a>
             <a
-              href="#testimonials"
+              href="#pricing"
               className="text-sm hover:text-primary transition-colors"
             >
-              Depoimentos
+              Preços
             </a>
             <a
               href="#pricing"
               className="text-sm hover:text-primary transition-colors"
             >
-              Preços
+              Sobre
             </a>
           </nav>
 
@@ -185,6 +185,13 @@ export default function PeriodicGymLanding() {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Preços
+                </a>
+                <a
+                  href="#about"
+                  className="text-sm"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Sobre
                 </a>
               </nav>
               <div className="flex flex-col gap-3 px-4 pb-4">
