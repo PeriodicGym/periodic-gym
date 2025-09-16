@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
@@ -6,12 +7,14 @@ import {
   Calendar,
   Check,
   Dumbbell,
+  Menu,
   Smartphone,
   Target,
   Trophy,
+  X,
 } from "lucide-react";
 import Link from "next/link";
-import Spline from "@splinetool/react-spline/next";
+import Spline from "@splinetool/react-spline";
 import {
   Card,
   CardContent,
@@ -20,6 +23,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useState } from "react";
 
 const features = [
   {
@@ -70,17 +74,18 @@ const plans = [
   },
 ];
 
-export default function Home() {
+export default function PeriodicGymLanding() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between px-4">
-          <div className="flex items-center gap-3">
+        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
+          <Link href="/" className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Dumbbell className="h-4 w-4" />
             </div>
             <span className="text-xl font-bold">PeriodicGym</span>
-          </div>
+          </Link>
 
           <nav className="hidden font-light md:flex items-center gap-6">
             <a
@@ -103,9 +108,10 @@ export default function Home() {
             </a>
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3">
             <Button
               className="bg-brand-dark border-2 border-primary text-primary"
+              variant="outline"
               asChild
             >
               <Link href="/">Entrar</Link>
@@ -114,53 +120,97 @@ export default function Home() {
               <Link href="/">Começar Grátis</Link>
             </Button>
           </div>
+
+          <div className="md:hidden">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </Button>
+          </div>
         </div>
-      </header>
 
-      <section className="flex items-center justify-between py-20 lg:py-32">
-        <div className="container px-4">
-          <div className="mx-auto ml-4 p-4 max-w-4xl ">
-            <h1 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-4xl">
-              Transforme seus
-              <span className="text-primary"> treinos</span> em
-              <span className="text-primary"> resultados</span>
-            </h1>
-
-            <p className="mt-6 text-xs md:text-lg leading-8 text-muted-foreground max-w-2xl mx-auto">
-              A plataforma mais completa para acompanhar sua evolução na
-              academia. Com IA integrada, análises detalhadas e interface
-              intuitiva.
-            </p>
-
-            <div className="mt-10 flex items-center gap-4">
-              <Button size="lg" asChild>
-                <Link href="/login">
-                  Começar Gratuitamente
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+        {isMenuOpen && (
+          <div className="md:hidden bg-background/95 backdrop-blur border-t">
+            <nav className="flex flex-col bg-background/95 backdrop-blur items-center gap-4 py-4">
+              <a
+                href="#features"
+                className="text-sm"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Funcionalidades
+              </a>
+              <a
+                href="#pricing"
+                className="text-sm"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Preços
+              </a>
+            </nav>
+            <div className="flex flex-col gap-3 px-4 pb-4">
+              <Button
+                className="bg-brand-dark border-2 border-primary text-primary w-full"
+                variant="outline"
+                asChild
+              >
+                <Link href="/">Entrar</Link>
+              </Button>
+              <Button asChild className="w-full">
+                <Link href="/">Começar Grátis</Link>
               </Button>
             </div>
+          </div>
+        )}
+      </header>
 
-            <div className="mt-8 flex items-center justify-center gap-8 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-green-500" />
-                Grátis para começar
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-green-500" />
-                Sem cartão de crédito
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-green-500" />
-                Cancele quando quiser
-              </div>
+      <section className="flex flex-col sm:flex-row items-center justify-between p-10 lg:p-20">
+        <div className="w-full lg:w-1/2 text-center lg:text-left">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+            Transforme seus
+            <span className="text-primary"> treinos</span> em
+            <span className="text-primary"> resultados</span>
+          </h1>
+
+          <p className="mt-6 text-base md:text-lg leading-8 text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+            A plataforma mais completa para acompanhar sua evolução na academia.
+            Com IA integrada, análises detalhadas e interface intuitiva.
+          </p>
+
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <Button size="lg" asChild className="w-full sm:w-auto">
+              <Link href="/login">
+                Começar Gratuitamente
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-x-8 gap-y-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-green-500" />
+              Grátis para começar
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-green-500" />
+              Sem cartão de crédito
+            </div>
+            <div className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-green-500" />
+              Cancele quando quiser
             </div>
           </div>
         </div>
-        <Spline
-          className="h-full"
-          scene="https://prod.spline.design/Ulr8wOnMHuMpsefP/scene.splinecode"
-        />
+
+        <div className="w-full lg:w-1/2 h-80 sm:h-96 lg:h-[500px]">
+          <Spline scene="https://prod.spline.design/Ulr8wOnMHuMpsefP/scene.splinecode" />
+        </div>
       </section>
 
       <section id="features" className="py-20 bg-muted/30">
@@ -261,7 +311,7 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="bg-[url(/BannerFooter.svg)]  text-white">
+        <div className="bg-[url(/BannerFooter.svg)] bg-no-repeat bg-cover text-white">
           <div className="mx-auto p-16 text-center">
             <h2 className="text-3xl  font-bold tracking-tight sm:text-4xl">
               Pronto para transformar seus treinos?
