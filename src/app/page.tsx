@@ -1,20 +1,6 @@
 "use client";
-import {
-  ArrowRight,
-  BarChart3,
-  Bot,
-  Calendar,
-  Check,
-  Dumbbell,
-  Menu,
-  Smartphone,
-  Target,
-  Trophy,
-  X,
-} from "lucide-react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import Spline from "@splinetool/react-spline";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -22,9 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import Spline from "@splinetool/react-spline";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  BarChart3,
+  Bot,
+  Calendar,
+  Check,
+  Dumbbell,
+  Smartphone,
+  Target,
+  Trophy
+} from "lucide-react";
+import Link from "next/link";
 
 const features = [
   {
@@ -76,7 +73,6 @@ const plans = [
 ];
 
 export default function PeriodicGymLanding() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -93,124 +89,8 @@ export default function PeriodicGymLanding() {
     },
   };
   return (
-    <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <Dumbbell className="h-4 w-4" />
-            </div>
-            <span className="text-xl font-bold">PeriodicGym</span>
-          </Link>
 
-          <nav className="hidden font-light md:flex items-center gap-6">
-            <a
-              href="#features"
-              className="text-sm hover:text-primary transition-colors"
-            >
-              Funcionalidades
-            </a>
-            <a
-              href="#pricing"
-              className="text-sm hover:text-primary transition-colors"
-            >
-              Preços
-            </a>
-            <a
-              href="#pricing"
-              className="text-sm hover:text-primary transition-colors"
-            >
-              Sobre
-            </a>
-          </nav>
-
-          <div className="hidden md:flex items-center gap-3">
-            <Button
-              className="bg-brand-dark border-2 border-primary text-primary"
-              variant="outline"
-              asChild
-            >
-              <Link href="/">Entrar</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/">Começar Grátis</Link>
-            </Button>
-          </div>
-
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <AnimatePresence initial={false} mode="wait">
-                <motion.div
-                  key={isMenuOpen ? "x" : "menu"}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {isMenuOpen ? (
-                    <X className="h-6 w-6" />
-                  ) : (
-                    <Menu className="h-6 w-6" />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </Button>
-          </div>
-        </div>
-
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-            >
-              <nav className="flex flex-col items-center gap-4 py-4">
-                <a
-                  href="#features"
-                  className="text-sm"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Funcionalidades
-                </a>
-                <a
-                  href="#pricing"
-                  className="text-sm"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Preços
-                </a>
-                <a
-                  href="#about"
-                  className="text-sm"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Sobre
-                </a>
-              </nav>
-              <div className="flex flex-col gap-3 px-4 pb-4">
-                <Button
-                  className="bg-brand-dark border-2 border-primary text-primary w-full"
-                  variant="outline"
-                  asChild
-                >
-                  <Link href="/">Entrar</Link>
-                </Button>
-                <Button asChild className="w-full">
-                  <Link href="/">Começar Grátis</Link>
-                </Button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
-
+    <div className="min-h-screen bg-background mx-auto">
       <section className="flex flex-col sm:flex-row items-center justify-between p-10 lg:p-20">
         <motion.div
           className="w-full lg:w-1/2 text-center lg:text-left"
@@ -272,7 +152,7 @@ export default function PeriodicGymLanding() {
       </section>
 
       <section id="features" className="py-20 bg-muted/30">
-        <div className="container px-4">
+        <div className="px-4">
           <motion.div
             className="mx-auto max-w-2xl text-center mb-16"
             initial="hidden"
@@ -326,7 +206,7 @@ export default function PeriodicGymLanding() {
       </section>
 
       <section id="pricing" className="py-20">
-        <div className="container px-4">
+        <div className="px-4">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               Planos para todos os perfis
@@ -409,7 +289,7 @@ export default function PeriodicGymLanding() {
       </section>
 
       <footer className="border-t py-12">
-        <div className="container px-4">
+        <div className="px-4">
           <div className="grid gap-8 md:grid-cols-4">
             <div>
               <div className="flex items-center gap-3 mb-4">

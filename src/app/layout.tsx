@@ -1,3 +1,4 @@
+import Header from "@/components/header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -18,8 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
-      <body className={`${interSans.variable} antialiased`}>{children}</body>
+    <html lang="pt-br" suppressHydrationWarning>
+      <body className={`${interSans.variable} antialiased`}>
+        <Header/>
+        {children}
+      </body>
     </html>
   );
 }
