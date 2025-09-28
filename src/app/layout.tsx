@@ -1,4 +1,3 @@
-import Header from "@/components/header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -22,7 +21,6 @@ export default function RootLayout({
     <html lang="pt-br" suppressHydrationWarning>
       <body className={`${interSans.variable} antialiased`}>
         <main className="min-h-screen bg-background mx-auto">
-        <Header/>
         {children}
         </main>
       </body>

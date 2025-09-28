@@ -117,78 +117,87 @@ export default function CurrentWorkoutPage(){
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
-                {exercise.sets_data.map((set, setIndex) => (
-                  <div key={setIndex} className="flex items-center gap-3 p-3 border rounded-lg">
-                    <span className="text-sm font-medium w-8">{setIndex + 1}ª</span>
+          {exercise.sets_data.map((set, setIndex) => (
+            <div
+              key={setIndex}
 
-                    <div className="flex items-center gap-2">
-                      <Label className="text-xs">Peso (kg)</Label>
-                      <div className="flex items-center gap-1">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="h-8 w-8 p-0 bg-transparent"
-                          onClick={() => updateSet(exercise.id, setIndex, "weight", Math.max(0, set.weight - 2.5))}
-                        >
-                          <Minus className="h-3 w-3" />
-                        </Button>
-                        <Input
-                          type="number"
-                          value={set.weight || ""}
-                          onChange={(e) => updateSet(exercise.id, setIndex, "weight", Number(e.target.value))}
-                          className="w-16 h-8 text-center"
-                          placeholder="0"
-                        />
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="h-8 w-8 p-0 bg-transparent"
-                          onClick={() => updateSet(exercise.id, setIndex, "weight", set.weight + 2.5)}
-                        >
-                          <Plus className="h-3 w-3" />
-                        </Button>
-                      </div>
-                    </div>
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-4 p-3 border rounded-lg"
+            >
+              <span className="text-sm font-medium w-full">{setIndex + 1}ª Serie </span>
 
-                    <div className="flex items-center gap-2">
-                      <Label className="text-xs">Reps</Label>
-                      <div className="flex items-center gap-1">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="h-8 w-8 p-0 bg-transparent"
-                          onClick={() => updateSet(exercise.id, setIndex, "reps", Math.max(0, set.reps - 1))}
-                        >
-                          <Minus className="h-3 w-3" />
-                        </Button>
-                        <Input
-                          type="number"
-                          value={set.reps || ""}
-                          onChange={(e) => updateSet(exercise.id, setIndex, "reps", Number(e.target.value))}
-                          className="w-16 h-8 text-center"
-                          placeholder="0"
-                        />
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="h-8 w-8 p-0 bg-transparent"
-                          onClick={() => updateSet(exercise.id, setIndex, "reps", set.reps + 1)}
-                        >
-                          <Plus className="h-3 w-3" />
-                        </Button>
-                      </div>
-                    </div>
 
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full sm:w-auto">
+                <div className="flex items-center gap-2">
+                  <Label htmlFor={`weight-${exercise.id}-${setIndex}`} className="text-xs">Peso (kg)</Label>
+                  <div className="flex items-center gap-1">
                     <Button
-                      variant={set.completed ? "default" : "outline"}
+                      variant="outline"
                       size="sm"
-                      onClick={() => completeSet(exercise.id, setIndex)}
-                      className="ml-auto"
+                      className="h-8 w-8 p-0 bg-transparent"
+                      onClick={() => updateSet(exercise.id, setIndex, "weight", Math.max(0, set.weight - 2.5))}
                     >
-                      {set.completed ? <CheckCircle className="h-4 w-4" /> : "Concluir"}
+                      <Minus className="h-3 w-3" />
+                    </Button>
+                    <Input
+                      id={`weight-${exercise.id}-${setIndex}`}
+                      type="number"
+                      value={set.weight || ""}
+                      onChange={(e) => updateSet(exercise.id, setIndex, "weight", Number(e.target.value))}
+                      className="w-16 h-8 text-center"
+                      placeholder="0"
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 w-8 p-0 bg-transparent"
+                      onClick={() => updateSet(exercise.id, setIndex, "weight", set.weight + 2.5)}
+                    >
+                      <Plus className="h-3 w-3" />
                     </Button>
                   </div>
-                ))}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <Label htmlFor={`reps-${exercise.id}-${setIndex}`} className="text-xs">Repetições</Label>
+                  <div className="flex items-center gap-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 w-8 p-0 bg-transparent"
+                      onClick={() => updateSet(exercise.id, setIndex, "reps", Math.max(0, set.reps - 1))}
+                    >
+                      <Minus className="h-3 w-3" />
+                    </Button>
+                    <Input
+                      id={`reps-${exercise.id}-${setIndex}`}
+                      type="number"
+                      value={set.reps || ""}
+                      onChange={(e) => updateSet(exercise.id, setIndex, "reps", Number(e.target.value))}
+                      className="w-16 h-8 text-center"
+                      placeholder="0"
+                    />
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="h-8 w-8 p-0 bg-transparent"
+                      onClick={() => updateSet(exercise.id, setIndex, "reps", set.reps + 1)}
+                    >
+                      <Plus className="h-3 w-3" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <Button
+                variant={set.completed ? "default" : "outline"}
+                size="sm"
+                onClick={() => completeSet(exercise.id, setIndex)}
+                className="w-full sm:w-auto sm:ml-auto mt-2 sm:mt-0"
+              >
+                {set.completed ? <CheckCircle className="h-4 w-4" /> : "Concluir"}
+              </Button>
+            </div>
+          ))}
               </CardContent>
             </Card>
           ))}

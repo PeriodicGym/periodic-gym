@@ -1,5 +1,6 @@
 "use client";
-import Hero from "@/components/hero";
+import Header from "@/components/landing/header";
+import Hero from "@/components/landing/hero";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +24,7 @@ import { fadeInUp, features, plans, staggerContainer } from "../../siteconfig";
 export default function PeriodicGymLanding() {
   return (
     <>
+    <Header/>
     <Hero />
     <div className="min-h-screen bg-background mx-auto">
       <section id="features" className="py-20 bg-muted/30">

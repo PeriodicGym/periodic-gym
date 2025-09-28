@@ -1,9 +1,9 @@
 'use client'
 import { AnimatePresence, motion } from "framer-motion";
 import { Dumbbell, Menu, X } from "lucide-react";
-import { useState } from "react";
-import { Button } from "./ui/button";
 import Link from "next/link";
+import { useState } from "react";
+import { Button } from "../ui/button";
 
 const header = () => {
 

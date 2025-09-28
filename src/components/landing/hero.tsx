@@ -1,9 +1,9 @@
 import Spline from "@splinetool/react-spline";
 import { motion } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
-import { fadeInUp, staggerContainer } from "../../siteconfig";
-import { Button } from "./ui/button";
 import Link from "next/link";
+import { fadeInUp, staggerContainer } from "../../../siteconfig";
+import { Button } from "../ui/button";
 
 const hero = () => {
   return (
