@@ -34,6 +34,53 @@ export const features = [
   },
 ];
 
+export const mockExercises =  [
+  {
+    id: 1,
+    name: "Supino Reto",
+    muscle: "Peito",
+    sets: 4,
+    reps: "8-10",
+    lastWeight: 80,
+    completed: false,
+    sets_data: [
+      { weight: 0, reps: 0, completed: false },
+      { weight: 0, reps: 0, completed: false },
+      { weight: 0, reps: 0, completed: false },
+      { weight: 0, reps: 0, completed: false },
+    ],
+  },
+  {
+    id: 2,
+    name: "Supino Inclinado",
+    muscle: "Peito Superior",
+    sets: 3,
+    reps: "10-12",
+    lastWeight: 70,
+    completed: false,
+    sets_data: [
+      { weight: 0, reps: 0, completed: false },
+      { weight: 0, reps: 0, completed: false },
+      { weight: 0, reps: 0, completed: false },
+    ],
+  },
+  {
+    id: 3,
+    name: "Desenvolvimento Militar",
+    muscle: "Ombro",
+    sets: 4,
+    reps: "8-10",
+    lastWeight: 50,
+    completed: false,
+    sets_data: [
+      { weight: 0, reps: 0, completed: false },
+      { weight: 0, reps: 0, completed: false },
+      { weight: 0, reps: 0, completed: false },
+      { weight: 0, reps: 0, completed: false },
+    ],
+  },
+]
+
 export const plans = [
   {
     name: "Gratuito",
