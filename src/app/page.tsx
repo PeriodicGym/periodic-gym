@@ -1,4 +1,6 @@
 "use client";
+import Header from "@/components/landing/header";
+import Hero from "@/components/landing/hero";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,149 +10,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Spline from "@splinetool/react-spline";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  BarChart3,
-  Bot,
-  Calendar,
   Check,
-  Dumbbell,
-  Smartphone,
-  Target,
-  Trophy
+  Dumbbell
 } from "lucide-react";
 import Link from "next/link";
+import { fadeInUp, features, plans, staggerContainer } from "../../siteconfig";
 
-const features = [
-  {
-    icon: Calendar,
-    title: "Calendário Inteligente",
-    description:
-      "Organize seus treinos com visualização mensal e lembretes automáticos",
-  },
-  {
-    icon: BarChart3,
-    title: "Análise de Progresso",
-    description: "Gráficos detalhados da sua evolução e estimativa de 1RM",
-  },
-  {
-    icon: Bot,
-    title: "Assistente IA",
-    description: "Sugestões personalizadas baseadas no seu desempenho",
-  },
-  {
-    icon: Smartphone,
-    title: "100% Responsivo",
-    description: "Acesse de qualquer dispositivo, a qualquer hora",
-  },
-  {
-    icon: Trophy,
-    title: "Gamificação",
-    description: "Conquistas, badges e streaks para manter a motivação",
-  },
-  {
-    icon: Target,
-    title: "Metas Personalizadas",
-    description: "Defina objetivos e acompanhe seu progresso em tempo real",
-  },
-];
 
-const plans = [
-  {
-    name: "Gratuito",
-    price: "R$ 0",
-    period: "/mês",
-    description: "Perfeito para começar",
-    features: [
-      "Assistente IA limitado",
-      "Histórico básico",
-      "Suporte por email",
-    ],
-    popular: false,
-  },
-];
 
 export default function PeriodicGymLanding() {
-
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
   return (
-
+    <>
+    <Header/>
+    <Hero />
     <div className="min-h-screen bg-background mx-auto">
-      <section className="flex flex-col sm:flex-row items-center justify-between p-10 lg:p-20">
-        <motion.div
-          className="w-full lg:w-1/2 text-center lg:text-left"
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-        >
-          <motion.h1
-            variants={fadeInUp}
-            className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
-          >
-            Transforme seus
-            <span className="text-primary"> treinos</span> em
-            <span className="text-primary"> resultados</span>
-          </motion.h1>
-
-          <motion.p
-            variants={fadeInUp}
-            className="mt-6 text-base md:text-lg leading-8 text-muted-foreground max-w-2xl mx-auto lg:mx-0"
-          >
-            A plataforma mais completa para acompanhar sua evolução na academia.
-            Com IA integrada, análises detalhadas e interface intuitiva.
-          </motion.p>
-
-          <motion.div
-            variants={fadeInUp}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
-          >
-            <Button size="lg" asChild className="w-full sm:w-auto">
-              <Link href="/login">
-                Começar Gratuitamente
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          </motion.div>
-
-          <motion.div
-            variants={fadeInUp}
-            className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-x-8 gap-y-4 text-sm text-muted-foreground"
-          >
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-green-500" />
-              Grátis para começar
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-green-500" />
-              Sem cartão de crédito
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-green-500" />
-              Cancele quando quiser
-            </div>
-          </motion.div>
-        </motion.div>
-
-        <div className="w-full lg:w-1/2 h-80 sm:h-96 lg:h-[500px]">
-          <Spline scene="https://prod.spline.design/Ulr8wOnMHuMpsefP/scene.splinecode" />
-        </div>
-      </section>
-
       <section id="features" className="py-20 bg-muted/30">
         <div className="px-4">
           <motion.div
@@ -220,9 +96,7 @@ export default function PeriodicGymLanding() {
             {plans.map((plan, index) => (
               <Card
                 key={index}
-                className={`relative ${
-                  plan.popular ? "ring-2 ring-primary" : ""
-                } shadow-[0px_6px_12px_2px_rgba(0,_0,_0,_0.1)]`}
+                className={`relative ${plan.popular ? "ring-2 ring-primary" : ""} shadow-[0px_6px_12px_2px_rgba(0,_0,_0,_0.1)]`}
               >
                 {plan.popular && (
                   <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
@@ -365,6 +239,6 @@ export default function PeriodicGymLanding() {
           </div>
         </div>
       </footer>
-    </div>
+    </div></>
   );
 }
