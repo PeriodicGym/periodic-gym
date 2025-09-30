@@ -74,14 +74,14 @@ const secondaryItems = [
 
 export function AppSidebar() {
   return (
-    <Sidebar className="border-r">
-      <SidebarHeader className="border-b px-6 py-4">
+    <Sidebar className="border-r w-52">
+      <SidebarHeader className="border-b px-3 py-3  ">
         <div className="flex items-center gap-3">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Dumbbell className="h-4 w-4" />
           </div>
           <div className="flex flex-col">
-            <span className="text-lg font-semibold">FitTracker</span>
+            <span className="text-lg font-semibold">PeriodicGym</span>
             <span className="text-xs text-muted-foreground">Seu progresso</span>
           </div>
         </div>
